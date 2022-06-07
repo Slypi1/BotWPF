@@ -1,0 +1,59 @@
+﻿<Window x:Class="BotWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BotWPF"
+        mc:Ignorable="d"
+         Title="MainWindow" Height="450" Width="786" Background="#FF4D4D4E">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <ListBox x:Name="logList" 
+                 Grid.Column="0" 
+                 Margin="5,22,5,5" Background="#FF601C6B" 
+                 >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" Margin="5" BorderThickness="1" CornerRadius="10">
+                        <StackPanel Margin="10">
+                            <TextBlock Text="{Binding FirstName}" Margin="0" FontSize="15"/>
+                            <TextBlock Text="{Binding Msg}" Margin="0" FontSize="20"/>
+                            <TextBlock Text="{Binding Time}" Margin="10 0" FontSize="10" Foreground="Gray" TextAlignment="Right"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <GroupBox Grid.Column="1" 
+                  FontSize="20"
+                  Header="Отправка сообщения" 
+                  Margin="5,22,5,5" 
+                  >
+            <StackPanel>
+                <TextBlock x:Name="TargetSend" 
+                           Text="{Binding ElementName=logList, Path=SelectedItem.Id}"
+                           Visibility="Collapsed"
+                           Margin="5"/>
+
+                <TextBox x:Name="txtMsgSend" FontSize="20" Margin="5" Background="#FFBB97BF"/>
+                <Button x:Name="btnMsgSend" FontSize="20" Content="Отправить" Click="btnMsgSendClick" Background="#FF7A4D88" Width="190"/>
+            </StackPanel>
+        </GroupBox>
+        <Menu Height="22" VerticalAlignment="Top" Background="#FF4E4E4E">
+
+            <MenuItem Header="Файл" Background="#FF74438C" Height="18" Width="89" RenderTransformOrigin="0.497,0.615">
+                <MenuItem Header="Сохранить" Click="SaveJsonClick" Background="#FFBB9DC3"/>
+                <MenuItem Header="Выйти" Click="CloseForm" Background="#FFB89DC5" />
+            </MenuItem>
+        </Menu>
+
+
+    </Grid>
+</Window>
